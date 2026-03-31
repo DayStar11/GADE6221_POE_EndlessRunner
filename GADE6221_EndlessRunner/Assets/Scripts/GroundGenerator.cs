@@ -6,7 +6,7 @@ public class GroundGenerator : MonoBehaviour
     public GameObject groundTile;
     Vector3 nextGenPoint;
 
-    public void GenerateTile()
+    public void GenerateTile() 
     {
         GameObject temp = Instantiate(groundTile, nextGenPoint, quaternion.identity);
         nextGenPoint = temp.transform.GetChild(1).transform.position;

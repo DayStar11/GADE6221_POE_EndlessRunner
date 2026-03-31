@@ -4,6 +4,7 @@ public class ObstacleController : MonoBehaviour
 {
     PlayerController playerMovement;
 
+
     void Start()
     {
         playerMovement = GameObject.FindObjectOfType<PlayerController>();
@@ -17,8 +18,16 @@ public class ObstacleController : MonoBehaviour
         }
     }
 
+
     void Update()
     {
-        
+        // function for player to earn points after passing an opstacle. checks if player has passed the obstacle
+        if (playerMovement != null && playerMovement.transform.position.z > transform.position.z + 1f && !counted)
+        {
+            playerMovement.AddDodgePoint();
+            counted = true;
+        }
     }
+
+    private bool counted = false;
 }

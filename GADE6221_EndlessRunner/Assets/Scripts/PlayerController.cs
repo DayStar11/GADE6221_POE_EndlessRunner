@@ -1,8 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement; //restart mechanics
+using TMPro;// UI elements for coin and dodge point systems - kylin 
 
 public class PlayerController : MonoBehaviour
-{
+{    //kylin player coin and point system
+    public int coins = 0; // coins collected
+    public int DodgePoints = 0; // obstacle dodge points
+    public TextMeshProUGUI coinText;
+    public TextMeshProUGUI dodgeText;
+
     public float playerSpeed = 15.0f;
     public float turningSpeed = 15.0f;
     //jump mechanics:
@@ -20,20 +26,21 @@ public class PlayerController : MonoBehaviour
     public float xInput;
 
     void Start()
-    {            
-            //for jump physics
+    {
+        //for jump physics
         rb = GetComponent<Rigidbody>();
         onGround = true;
     }
 
     // Update is called once per frame
     void Update()
-    {        
+    {
         //player life mechanics:
-        if (isDead!=false) 
+        if (isDead != false)
         {
             return;
         }
+       
 
         //if player falls off the platform:
         if (transform.position.y < -5)
@@ -41,8 +48,8 @@ public class PlayerController : MonoBehaviour
             PlayerDeath(); //calls the PlayerDeath function if player falls off of the platform. checks their vertical(y) position. if players y position is < -5, PlayerDeath() is triggered
         }
 
-            //creates upward force (jump)
-        if (Input.GetButtonDown("Jump") && onGround) 
+        //creates upward force (jump)
+        if (Input.GetButtonDown("Jump") && onGround)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             onGround = false;
@@ -71,13 +78,20 @@ public class PlayerController : MonoBehaviour
     public void PlayerDeath()  //player life mechanics:
     {
         isDead = true;
-        //this method should also restart the game (using unityengine.scenemanagement)
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name); //scenemanager will reload the scene/restart
+       
+        //got rid of scene manager 
+
+        // gives the player the option to restart kylin
+        GameManagement gc = GameObject.FindObjectOfType<GameManagement>();
+        if (gc != null)
+        {
+            gc.GameOver(); // displays the game over panel
+        }
     }
 
     //void RestartGame() //this method will be used to eventually give the player the option to restart or quit. method will most likely be moved to an Empty containing a GameController.cs. We have not learnt how to create menues yet
     //{
-        
+
     //}
 
     void OnCollisionEnter(Collision collision)
@@ -86,5 +100,30 @@ public class PlayerController : MonoBehaviour
         {
             onGround = true;
         }
+    }
+
+    void UpdateUI() //kylin
+    {    // updates the UI text to record their current coin and dodge points
+        if (coinText != null)
+        { coinText.text = "Coins: " + coins; }
+        if (dodgeText != null)
+        { dodgeText.text = "Score " + DodgePoints; }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Coin"))
+        {
+            coins++;
+            Destroy(other.gameObject);
+            UpdateUI();
+        }
+    }
+
+    // called when player successfully dodges and obstacle
+    public void AddDodgePoint()
+    {
+        DodgePoints++;
+        UpdateUI();
     }
 }

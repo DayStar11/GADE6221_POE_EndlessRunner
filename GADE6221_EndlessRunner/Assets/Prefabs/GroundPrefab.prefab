@@ -184,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1438836744523940474}
   - component: {fileID: 5163966576381691558}
-  - component: {fileID: 7176161684744793541}
+  - component: {fileID: -4176648844532292869}
   m_Layer: 0
   m_Name: GroundPrefab
   m_TagString: Untagged
@@ -233,7 +233,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 20, y: 20, z: 20}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7176161684744793541
+--- !u!114 &-4176648844532292869
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,6 +246,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
   obstaclePrefab: {fileID: 449250660656082161, guid: b74d340b2bfad2b4e807f0e9564aa4d6, type: 3}
+  coinPrefab: {fileID: 3593291586115731116, guid: 6181c592670c75642a1591e5e3f15a5c, type: 3}
+  maxCoinsPerTile: 1
 --- !u!1 &3709746199630180282
 GameObject:
   m_ObjectHideFlags: 0
