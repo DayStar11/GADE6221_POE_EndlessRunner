@@ -9,10 +9,11 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI coinText;
     public TextMeshProUGUI dodgeText;
 
+    //daiyaan:
     public float playerSpeed = 15.0f;
-    public float turningSpeed = 15.0f;
+    public float turningSpeed = 20.0f;
     //jump mechanics:
-    public float jumpForce = 5.0f;
+    public float jumpForce = 6.0f;
     private bool onGround;
     private Rigidbody rb;
     //boundaries:
@@ -55,6 +56,11 @@ public class PlayerController : MonoBehaviour
             onGround = false;
         }
 
+        if (rb.linearVelocity.y < 0)
+        {
+            rb.linearVelocity += Vector3.up * Physics.gravity.y * jumpForce *2f * Time.deltaTime;
+        }
+
         //'time.deltaTime' makes players movement relative to the games speed, 'Space.World' makes players movement relative to the world around the player
         transform.Translate(Vector3.forward * Time.deltaTime * playerSpeed, Space.World);
 
@@ -89,20 +95,32 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //void RestartGame() //this method will be used to eventually give the player the option to restart or quit. method will most likely be moved to an Empty containing a GameController.cs. We have not learnt how to create menues yet
-    //{
-
-    //}
 
     void OnCollisionEnter(Collision collision)
     {
+        //daiyaan: this allows player to land on top of obstacle2, without dying. However, if player bumps its sides, they'll still die
+        if (collision.gameObject.CompareTag("Platform")) //obstacle 2's tag is set to platform so that this logic only applies to it
+        {
+            foreach (ContactPoint contact in collision.contacts)
+            {
+                //makes sure that the player landed on top of the obstacle
+                if (Vector3.Dot(contact.normal, Vector3.up) > 0.5f)
+                {
+                    onGround = true;
+                    return;
+                }
+            }
+            //if player did not land on top of it, calls playerdeath()
+            PlayerDeath();
+        }
+
         if (collision.gameObject.CompareTag("Ground"))
         {
             onGround = true;
         }
     }
-
-    void UpdateUI() //kylin
+     //kylin:
+    void UpdateUI() 
     {    // updates the UI text to record their current coin and dodge points
         if (coinText != null)
         { coinText.text = "Coins: " + coins; }
@@ -126,4 +144,5 @@ public class PlayerController : MonoBehaviour
         DodgePoints++;
         UpdateUI();
     }
+
 }

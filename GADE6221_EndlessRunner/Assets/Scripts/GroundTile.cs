@@ -7,8 +7,12 @@ public class NewMonoBehaviourScript : MonoBehaviour
     void Start()
     {
         groundGenerator = GameObject.FindObjectOfType<GroundGenerator>();
-        ObstacleGenerator();
+        Obstacle1Generator();
+        Obstacle2Generator();
+        Obstacle3Generator();
+
         GenerateCoins(); // kylin coin generator function
+        GroundCoinGenerator(); //daiyaan - ground coin function
     }
 
     private void OnTriggerExit(Collider other)
@@ -22,16 +26,32 @@ public class NewMonoBehaviourScript : MonoBehaviour
     {
         
     }
-
+    //daiyaan:
     public GameObject obstaclePrefab;
+    public GameObject obstacle2Prefab;
+    public GameObject obstacle3Prefab;
 
-    void ObstacleGenerator() //chooses a random empty position on the groundTile to spawn an obstacle
+
+    void Obstacle1Generator() //chooses a random empty position on the groundTile to spawn an obstacle
     {
         int obstacleGeneratorIndex = Random.Range(2, 5); //2,3,4 are the indexes of the obstacle EMPTY'S in the GroundPrefab
         Transform obstaclePosition = transform.GetChild(obstacleGeneratorIndex).transform; //returns the gameobject "ObstaclePrefab"
         Instantiate(obstaclePrefab, obstaclePosition.position, Quaternion.identity, transform); //Quarternion.identity ensures that the object does not rotate
     }
+    void Obstacle2Generator() 
+    {
+        int obstacle2GeneratorIndex = Random.Range(2, 5); 
+        Transform obstaclePosition = transform.GetChild(obstacle2GeneratorIndex).transform; 
+        Instantiate(obstacle2Prefab, obstaclePosition.position, Quaternion.identity, transform); 
+    }
+    void Obstacle3Generator() 
+    {
+        int obstacle3GeneratorIndex = Random.Range(2, 5); 
+        Transform obstaclePosition = transform.GetChild(obstacle3GeneratorIndex).transform; 
+        Instantiate(obstacle3Prefab, obstaclePosition.position, Quaternion.identity, transform); 
+    }
 
+    //kylin:
     public GameObject coinPrefab; // Kylin coin prefab
     public int maxCoinsPerTile = 2; // max num of coins that can spawn per tile
 
@@ -52,6 +72,15 @@ public class NewMonoBehaviourScript : MonoBehaviour
         }
     }
 
+    //daiyaan - ground coins
+    public GameObject groundCoinPrefab;
 
+    void GroundCoinGenerator()
+    {
+        int groundCoinGeneratorIndex = Random.Range(2, 5);
+        Transform groundCoinPosition = transform.GetChild(groundCoinGeneratorIndex).transform;
+        Vector3 spawnPos = groundCoinPosition.position + new Vector3(0, 0, 0);
+        Instantiate(coinPrefab, groundCoinPosition.position, Quaternion.identity, transform);
+    }
 
 }

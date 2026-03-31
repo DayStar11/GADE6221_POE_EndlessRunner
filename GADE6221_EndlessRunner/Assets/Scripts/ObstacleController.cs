@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class ObstacleController : MonoBehaviour
 {
+    //daiyaan:
     PlayerController playerMovement;
 
 
@@ -18,7 +19,7 @@ public class ObstacleController : MonoBehaviour
         }
     }
 
-
+    //kylin:
     void Update()
     {
         // function for player to earn points after passing an opstacle. checks if player has passed the obstacle

@@ -246,8 +246,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
   obstaclePrefab: {fileID: 449250660656082161, guid: b74d340b2bfad2b4e807f0e9564aa4d6, type: 3}
+  obstacle2Prefab: {fileID: 5796434997737686553, guid: 9cc2af10550b7eb41bc22ef9618bad9c, type: 3}
+  obstacle3Prefab: {fileID: 515735209477755160, guid: 78749245251e4da479c9f9a752f6f6d9, type: 3}
   coinPrefab: {fileID: 3593291586115731116, guid: 6181c592670c75642a1591e5e3f15a5c, type: 3}
   maxCoinsPerTile: 1
+  groundCoinPrefab: {fileID: 0}
 --- !u!1 &3709746199630180282
 GameObject:
   m_ObjectHideFlags: 0

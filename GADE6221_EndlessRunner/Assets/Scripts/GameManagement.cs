@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class GameManagement : MonoBehaviour
 {
+    //kylin:
     public GameObject gameOver;
     public TextMeshProUGUI finalCoinText;
     public TextMeshProUGUI finalDodgeText;
