@@ -247,11 +247,16 @@ MonoBehaviour:
   DodgePoints: 0
   coinText: {fileID: 0}
   dodgeText: {fileID: 0}
+  pickUpText: {fileID: 0}
+  timerText: {fileID: 0}
   playerSpeed: 15
   turningSpeed: 15
   jumpForce: 5
   rightLimit: 5
   leftLimit: -5
+  hasPickUp: 0
+  magnetActive: 0
+  superJumpActive: 0
   xInput: 0
 --- !u!136 &4789767760034405322
 CapsuleCollider:

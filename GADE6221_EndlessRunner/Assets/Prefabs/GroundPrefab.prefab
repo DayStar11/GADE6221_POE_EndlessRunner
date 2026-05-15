@@ -249,8 +249,12 @@ MonoBehaviour:
   obstacle2Prefab: {fileID: 5796434997737686553, guid: 9cc2af10550b7eb41bc22ef9618bad9c, type: 3}
   obstacle3Prefab: {fileID: 515735209477755160, guid: 78749245251e4da479c9f9a752f6f6d9, type: 3}
   coinPrefab: {fileID: 3593291586115731116, guid: 6181c592670c75642a1591e5e3f15a5c, type: 3}
-  maxCoinsPerTile: 1
   groundCoinPrefab: {fileID: 0}
+  permeatePrefab: {fileID: 1075285844392101136, guid: 6e561b48506071046bf9bd0ca4d57a7b, type: 3}
+  shieldPrefab: {fileID: 8719436276587590205, guid: c7a6389799d4c134a94364ba2854bf0b, type: 3}
+  bossKillerPrefab: {fileID: 6689898581570696356, guid: 57fe30b1e87c3184e9f32f83557cf472, type: 3}
+  coinMagnetPrefab: {fileID: 4200394943909411510, guid: 69d5aaee893c7e74699c1bc2df9d1b56, type: 3}
+  superJumpPrefab: {fileID: 7919078482755284129, guid: 648ef75e1183647498921c37a7e2243a, type: 3}
 --- !u!1 &3709746199630180282
 GameObject:
   m_ObjectHideFlags: 0

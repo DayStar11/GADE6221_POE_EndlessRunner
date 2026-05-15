@@ -29,15 +29,15 @@ public class GameManagement : MonoBehaviour
         // displays the final player score
         finalCoinText.text = "Coins Collected: " + player.coins;
         finalDodgeText.text = "Score Points: " + player.DodgePoints;
-        
+
         /// stops the game when the player dies
         Time.timeScale = 0f;
     }
 
-       // allows player to restart the game
+    // allows player to restart the game
     public void RestartGame()
     {
-        Time.timeScale = 1f; 
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
