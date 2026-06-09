@@ -7,14 +7,15 @@ TagManager:
   - Ground
   - Coin
   - Platform
+  - Boss
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Obstacle
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1768951339155662197}
   - component: {fileID: 3078243043134571161}
   - component: {fileID: 778214370444248688}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Obstacle3
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -137,6 +137,10 @@ PrefabInstance:
     - target: {fileID: 1013976576169047992, guid: e55a93b49644cee4298cccddca28c23f, type: 3}
       propertyPath: m_Name
       value: PlasticSignalBollard_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1013976576169047992, guid: e55a93b49644cee4298cccddca28c23f, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1760201462888509895, guid: e55a93b49644cee4298cccddca28c23f, type: 3}
       propertyPath: m_LocalScale.x

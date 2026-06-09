@@ -35,18 +35,15 @@ public class PlayerController : MonoBehaviour
     public bool bossKillerActive = false;
     private bool pickupLock = false;
     private bool powerUpActive = false;
+
     // variable to store pickups so they can be activated later
     private PlayerPickups.PickUpType storedPowerUp;
     private float pickUpTimer = 0f;
-
-
 
     private float normalJumpForce;
     private float normalSpeed;
 
     public bool bossFightActive = false;
-
-
     public float xInput;
 
     void Start()
@@ -61,7 +58,6 @@ public class PlayerController : MonoBehaviour
         if (healthText != null)
         {
             healthText.gameObject.SetActive(false);
-
         }
     }
 
@@ -75,7 +71,6 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-
 
         //if player falls off the platform:
         if (transform.position.y < -5)
@@ -97,7 +92,6 @@ public class PlayerController : MonoBehaviour
 
         //'time.deltaTime' makes players movement relative to the games speed, 'Space.World' makes players movement relative to the world around the player
         transform.Translate(Vector3.forward * Time.deltaTime * playerSpeed, Space.World);
-
 
 
         if (hasPickUp && Input.GetKeyDown(KeyCode.E)) // player presses e to activate pickup
@@ -126,7 +120,6 @@ public class PlayerController : MonoBehaviour
                 pickUpTimer = 0f;
                 permeateActive = false;
             }
-
         }
 
         if (magnetActive)
@@ -134,61 +127,27 @@ public class PlayerController : MonoBehaviour
             MagnetCoins();
         }
 
-        bool blockedSideways = false;
 
-        if (permeateActive)
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
         {
-            Collider[] hits = Physics.OverlapSphere(transform.position, 0.6f);
-
-            foreach (Collider hit in hits)
-            {
-                if (hit.CompareTag("Obstacle") || hit.CompareTag("Platform"))
-                {
-                    blockedSideways = true;
-                    break;
-                }
-            }
+            if (transform.position.x > leftLimit)
+                transform.Translate(Vector3.left * Time.deltaTime * turningSpeed);
         }
 
-        if (!blockedSideways)
+        if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
         {
-            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-            {
-                if (transform.position.x > leftLimit)
-                    transform.Translate(Vector3.left * Time.deltaTime * turningSpeed);
-            }
-
-            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-            {
-                if (transform.position.x < rightLimit)
-                    transform.Translate(Vector3.right * Time.deltaTime * turningSpeed);
-            }
-        }
-        if (permeateActive)
-        {
-            Collider[] hits = Physics.OverlapSphere(transform.position, 0.8f);
-
-            foreach (Collider hit in hits)
-            {
-                if (hit.CompareTag("Obstacle") || hit.CompareTag("Platform"))
-                {
-
-                    transform.position += Vector3.forward * Time.deltaTime * playerSpeed;
-                }
-            }
+            if (transform.position.x < rightLimit)
+                transform.Translate(Vector3.right * Time.deltaTime * turningSpeed);
         }
 
         if (bossKillerActive && Input.GetKeyDown(KeyCode.E))
         {
-            BossController boss =
-                GameObject.FindObjectOfType<BossController>();
+            BossController boss = GameObject.FindObjectOfType<BossController>();
 
             if (boss != null)
             {
                 boss.Retreat();
-
                 bossKillerActive = false;
-
             }
         }
 
@@ -198,8 +157,6 @@ public class PlayerController : MonoBehaviour
     {
         isDead = true;
 
-        //got rid of scene manager 
-
         // gives the player the option to restart kylin
         GameManagement gc = GameObject.FindObjectOfType<GameManagement>();
         if (gc != null)
@@ -207,7 +164,6 @@ public class PlayerController : MonoBehaviour
             gc.GameOver(); // displays the game over panel
         }
     }
-
 
     void OnCollisionEnter(Collision collision)
     {
@@ -224,7 +180,6 @@ public class PlayerController : MonoBehaviour
 
             foreach (ContactPoint contact in collision.contacts)
             {
-
                 //makes sure that the player landed on top of the obstacle
                 if (Vector3.Dot(contact.normal, Vector3.up) > 0.5f)
                 {
@@ -237,7 +192,6 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             if (permeateActive)
@@ -245,9 +199,6 @@ public class PlayerController : MonoBehaviour
 
             PlayerDeath();
         }
-
-
-
 
         if (collision.gameObject.CompareTag("Ground"))
         {
@@ -296,8 +247,6 @@ public class PlayerController : MonoBehaviour
 
     public void TryPickupPickUp(PlayerPickups.PickUpType type, GameObject pickup)
     {
-
-
         if (hasPickUp) return;
 
         hasPickUp = true;
@@ -341,6 +290,8 @@ public class PlayerController : MonoBehaviour
         if (storedPowerUp == PlayerPickups.PickUpType.Permeate) // allows players to pass through obstacles 
         {
             permeateActive = true;
+
+            Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Obstacle"), true);
         }
 
         if (storedPowerUp == PlayerPickups.PickUpType.Shield) // allows players to take a hit without losing health
@@ -367,19 +318,7 @@ public class PlayerController : MonoBehaviour
         if (timerText != null)
             timerText.text = "";
 
-        if (permeateActive) // if permeate is active players can pass through obstacles but also prevents them from earning points 
-        {
-            Collider[] hits = Physics.OverlapSphere(transform.position, 1.2f);
-
-            foreach (Collider hit in hits)
-            {
-                if (hit.CompareTag("Obstacle") || hit.CompareTag("Platform"))
-                {
-                    PlayerDeath();
-                    break;
-                }
-            }
-        }
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer("Obstacle"), false);
     }
 
     void MagnetCoins()
@@ -406,10 +345,7 @@ public class PlayerController : MonoBehaviour
         if (healthText != null)
         {
             healthText.text = "HP:" + playerHealth;
-
         }
-
-
     }
     public void BossDamage(int damage)
     {
@@ -426,8 +362,6 @@ public class PlayerController : MonoBehaviour
         {
             PlayerDeath();
         }
-
     }
-
 
 }

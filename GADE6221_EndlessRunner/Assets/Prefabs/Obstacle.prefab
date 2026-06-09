@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3481654914904499158}
   - component: {fileID: 4785506762378993561}
   - component: {fileID: 983398625795633494}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Obstacle
   m_TagString: Platform
   m_Icon: {fileID: 0}
@@ -181,6 +181,10 @@ PrefabInstance:
     - target: {fileID: 2870330542409281057, guid: 99ea5c30074df6049a24cf3e32d67aab, type: 3}
       propertyPath: m_Name
       value: Road_bumper
+      objectReference: {fileID: 0}
+    - target: {fileID: 2870330542409281057, guid: 99ea5c30074df6049a24cf3e32d67aab, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

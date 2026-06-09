@@ -83,8 +83,11 @@ public class NewMonoBehaviourScript : MonoBehaviour
         }
     }
 
+    private bool pickupAlreadySpawned = false; //daiyaan: fix for coins spawning within pickups
     void SpawnTile()
     {
+        pickupAlreadySpawned = false;
+
         SpawnPattern();
         GenerateCoins();
         GroundCoinGenerator();
@@ -104,12 +107,14 @@ public class NewMonoBehaviourScript : MonoBehaviour
         Destroy(gameObject, 2f);
     }
 
+    private int currentSafeLane; //daiyaan - fix for pickups/coins spawning inside of obstacles
     void SpawnPattern()
     {
         jumpObstacleSpawned = false;
         jumpLaneIndex = -1;
 
         int safeLane = Random.Range(0, 3);
+        currentSafeLane = safeLane;
 
         if (safeLane == previousSafeLane) // tracks how often the same lane is safe to prevent patterns from forming
         {
@@ -176,12 +181,14 @@ public class NewMonoBehaviourScript : MonoBehaviour
         }
         else
         {
-            lane = Random.Range(0, 3);
+            //lane = Random.Range(0, 3);
+            lane = currentSafeLane;
             Transform pos = transform.GetChild(lanes[lane]).transform;
             spawnPos = pos.position + Vector3.up * 0.2f;
         }
 
         Instantiate(coinPrefab, spawnPos, Quaternion.identity, transform);
+        pickupAlreadySpawned = true;
     }
 
     void GroundCoinGenerator()
@@ -190,7 +197,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
         if (chance > 68) return;
 
-        int lane = Random.Range(0, 3);
+        //int lane = Random.Range(0, 3);
+        int lane = currentSafeLane;
         Transform pos = transform.GetChild(lanes[lane]).transform;
 
         Vector3 spawnPos = pos.position + Vector3.up * 0.2f;
@@ -200,6 +208,9 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     void GeneratePowerUps()
     {
+        if (pickupAlreadySpawned)
+            return;
+
         int spawnChance = Random.Range(0, 100);
 
         if (spawnChance > 40) return;
@@ -229,7 +240,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
         }
         else
         {
-            lane = Random.Range(0, 3);
+            //lane = Random.Range(0, 3);
+            lane = currentSafeLane;
             Transform pos = transform.GetChild(lanes[lane]).transform;
             spawnPos = pos.position + Vector3.up * 0.8f;
         }
