@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
     public int playerHealth = 50;
     public bool shieldActive = false;
     public bool bossKillerActive = false;
-    private bool pickupLock = false;
     private bool powerUpActive = false;
 
     // variable to store pickups so they can be activated later
@@ -45,6 +44,10 @@ public class PlayerController : MonoBehaviour
 
     public bool bossFightActive = false;
     public float xInput;
+
+    //healthbar UI mechanics
+    public HealthBar playerHealthBar;
+    public int maxHealth = 50;
 
     void Start()
     {
@@ -59,13 +62,17 @@ public class PlayerController : MonoBehaviour
         {
             healthText.gameObject.SetActive(false);
         }
+
+        //healthbar UI mechanics
+        playerHealth = maxHealth;
+        playerHealthBar.SetHealth(playerHealth, maxHealth);
+        playerHealthBar.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
 
     {
-        Debug.Log("Update running");
         //player life mechanics:
         if (isDead != false)
         {
@@ -142,11 +149,12 @@ public class PlayerController : MonoBehaviour
 
         if (bossKillerActive && Input.GetKeyDown(KeyCode.E))
         {
-            BossController boss = GameObject.FindObjectOfType<BossController>();
+            BossController boss = FindFirstObjectByType<BossController>();
 
             if (boss != null)
             {
-                boss.Retreat();
+                //boss killer can deal 10 damage
+                boss.TakeDamage(10);
                 bossKillerActive = false;
             }
         }
@@ -158,7 +166,7 @@ public class PlayerController : MonoBehaviour
         isDead = true;
 
         // gives the player the option to restart kylin
-        GameManagement gc = GameObject.FindObjectOfType<GameManagement>();
+        GameManagement gc = FindFirstObjectByType<GameManagement>();
         if (gc != null)
         {
             gc.GameOver(); // displays the game over panel
@@ -346,17 +354,21 @@ public class PlayerController : MonoBehaviour
         {
             healthText.text = "HP:" + playerHealth;
         }
+        Debug.Log("Player HP: " + playerHealth);
+
     }
     public void BossDamage(int damage)
     {
         if (shieldActive)
         {
-            shieldActive = false;
-            Debug.Log("Attack blocked");
             return;
         }
 
         playerHealth -= damage;
+
+        //healthbar mechanics
+        playerHealthBar.SetHealth(playerHealth, maxHealth);
+
         UpdateHealthUI();
         if (playerHealth <= 0)
         {

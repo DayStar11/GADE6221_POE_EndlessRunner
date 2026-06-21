@@ -13,19 +13,28 @@ public class BossManager : MonoBehaviour
     public bool bossSpawned = false;
 
     public TextMeshProUGUI bossWarningText;
+    //boss fight loop mechanics - daiyaan
+    public float respawnDistance = 500f;
+    private float nextSpawnDistance;
+    private BossController currentBoss;
 
     void Start()
     {
-        bossWarningText.gameObject.SetActive(false);
+        player = FindFirstObjectByType<PlayerController>();
+        //boss fight loop mechanics - daiyaan
+        nextSpawnDistance = spawnDistance;
+
+        if (bossWarningText != null)
+        {
+            bossWarningText.gameObject.SetActive(false);
+        }
+
+
     }
+
     void FixedUpdate()
     {
-        Debug.Log("BossManager Running");
-
-        Debug.Log(player.transform.position.z);
-
-        if (!bossSpawned &&
-            player.transform.position.z >= spawnDistance)
+        if (!bossSpawned && player != null && player.transform.position.z >= nextSpawnDistance)
         {
             SpawnBoss();
         }
@@ -33,25 +42,55 @@ public class BossManager : MonoBehaviour
 
     void SpawnBoss()
     {
-        Debug.Log("BOSS SPAWNED");
-
         bossSpawned = true;
+        //only show players healthbar once boss has spawned
+        player.playerHealthBar.gameObject.SetActive(true);
 
         Vector3 spawnPos = player.transform.position;
-
-        spawnPos.z -= 5f;
+        spawnPos.z -= 5f; 
         spawnPos.y = 1f;
 
-        Instantiate(bossPrefab, spawnPos, Quaternion.identity);
+        GameObject bossInstance = Instantiate(bossPrefab, spawnPos, Quaternion.identity);
+
+        BossController bossScript = bossInstance.GetComponent<BossController>();
+        if (bossScript != null)
+        {
+            bossScript.player = player.transform;
+            currentBoss = bossScript;
+            player.bossFightActive = true;
+        }
+
+        if (bossWarningText != null)
+        {
+            StartCoroutine(BossWarning());
+        }
+
+        Debug.Log("Spawned " + bossInstance.name + " and successfully connected to Player tracking.");
     }
+
+    public void BossDefeated() //daiyaan
+    {
+        bossSpawned = false;
+
+        //remove players healthbar
+        player.playerHealthBar.gameObject.SetActive(false);
+
+        player.bossFightActive = false;
+
+        nextSpawnDistance = player.transform.position.z + respawnDistance;
+
+        currentBoss = null;
+
+        player.playerHealth = 50;
+    }
+
     IEnumerator BossWarning()
     {
         bossWarningText.gameObject.SetActive(true);
 
         for (int i = 0; i < 6; i++)
         {
-            bossWarningText.enabled =
-                !bossWarningText.enabled;
+            bossWarningText.enabled = !bossWarningText.enabled;
 
             yield return new WaitForSeconds(0.4f);
         }

@@ -30,9 +30,8 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
     void Start()
     {
-        groundGenerator = GameObject.FindObjectOfType<GroundGenerator>();
-
-        player = GameObject.FindObjectOfType<PlayerController>();
+        groundGenerator = Object.FindFirstObjectByType<GroundGenerator>();
+        player = Object.FindFirstObjectByType<PlayerController>();
 
         SpawnTile();
     }
@@ -73,7 +72,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
 
         int type = Random.Range(0, 100);
 
-        if (type < 75)
+        if (Random.value < 0.5f)
         {
             Instantiate(shieldPrefab, spawnPos, Quaternion.identity, transform);
         }
@@ -93,7 +92,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
         GroundCoinGenerator();
         GeneratePowerUps();
 
-        if (player != null && player.bossFightActive)
+        if (player != null && player.bossFightActive && Random.value < 0.45f)
         {
             SpawnBossFightPickups();
         }
@@ -251,17 +250,14 @@ public class NewMonoBehaviourScript : MonoBehaviour
         if (powerType < 20)
         {
             Instantiate(coinMagnetPrefab, spawnPos, Quaternion.identity, transform);
-            Debug.Log("Coin Magnet spawned");
         }
         else if (powerType < 60)
         {
             Instantiate(superJumpPrefab, spawnPos, Quaternion.identity, transform);
-            Debug.Log("Super Jump spawned");
         }
         else
         {
             Instantiate(permeatePrefab, spawnPos, Quaternion.identity, transform);
-            Debug.Log("Permeate spawned");
         }
     }
 

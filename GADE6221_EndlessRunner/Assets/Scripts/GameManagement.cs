@@ -13,7 +13,7 @@ public class GameManagement : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindObjectOfType<PlayerController>();
+        player = FindFirstObjectByType<PlayerController>();
         gameOver.SetActive(false); // hides the game over panel
 
 

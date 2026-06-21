@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -1549735729315305727}
   m_Layer: 3
   m_Name: Obstacle2
-  m_TagString: Platform
+  m_TagString: Obstacle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -369,6 +369,10 @@ PrefabInstance:
     - target: {fileID: 1780351737568190, guid: ed7795f4883cb97468521311f1be4e22, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1780351737568190, guid: ed7795f4883cb97468521311f1be4e22, type: 3}
+      propertyPath: m_TagString
+      value: Obstacle
       objectReference: {fileID: 0}
     - target: {fileID: 1791251313518316, guid: ed7795f4883cb97468521311f1be4e22, type: 3}
       propertyPath: m_Layer

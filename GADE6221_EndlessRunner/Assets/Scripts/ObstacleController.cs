@@ -8,7 +8,7 @@ public class ObstacleController : MonoBehaviour
 
     void Start()
     {
-        playerMovement = GameObject.FindObjectOfType<PlayerController>();
+        playerMovement = FindFirstObjectByType<PlayerController>();
     }
 
   // put this in notepad its the hitting obstacles multi
