@@ -219,7 +219,7 @@ public class PlayerController : MonoBehaviour
     }
 
     //kylin:
-    void UpdateUI()
+    public void UpdateUI()
     {    // updates the UI text to record their current coin and dodge points
         if (coinText != null)
         { coinText.text = "Coins: " + coins; }

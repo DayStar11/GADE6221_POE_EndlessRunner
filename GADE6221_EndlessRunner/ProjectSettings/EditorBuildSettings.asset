@@ -8,6 +8,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Main_Menu.unity
+    guid: f56f93e50028d9a458c8583f844f1d3a
+  - enabled: 1
+    path: Assets/Scenes/GADE6221_POE_COIN_SCENE.unity
+    guid: 41ec690322c5cb74c983df8f47dcec4a
+  - enabled: 1
+    path: Assets/Scenes/LVL2.unity
+    guid: bb268b3fc9e445e48bf3e9c60fd40cc5
+  - enabled: 1
+    path: Assets/Scenes/Death_Menu.unity
+    guid: bf0a8a323e14a9b49a0fdbedf02c01a9
+  - enabled: 1
+    path: Assets/Scenes/Pause_menu.unity
+    guid: 5587998d5b50ae943ae239d44f48fba4
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
