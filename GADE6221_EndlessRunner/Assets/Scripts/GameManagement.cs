@@ -21,6 +21,18 @@ public class GameManagement : MonoBehaviour
     // revive cost
     private int reviveCost = 10;
 
+    // EVENT SCORE SYSTEM
+
+   
+    public int pickupsActivated = 0;
+    public int levelsBeaten = 0;
+
+
+    // events
+    public event System.Action OnPickupActivated;
+    public event System.Action OnBossSpawned;
+    public event System.Action OnBossBeaten;
+
 
     void Start()
     {
@@ -124,4 +136,37 @@ public class GameManagement : MonoBehaviour
     {
         confirmPanel.SetActive(false);
     }
+  
+
+
+
+    public void PickupActivated()
+    {
+        pickupsActivated++;
+
+        OnPickupActivated?.Invoke();
+
+        Debug.Log("Pickups activated: " + pickupsActivated);
+    }
+
+
+
+    public void BossSpawned()
+    {
+        OnBossSpawned?.Invoke();
+
+        Debug.Log("Boss Spawn Event");
+    }
+
+
+
+    public void BossBeaten()
+    {
+        levelsBeaten++;
+
+        OnBossBeaten?.Invoke();
+
+        Debug.Log("Levels beaten: " + levelsBeaten);
+    }
+
 }

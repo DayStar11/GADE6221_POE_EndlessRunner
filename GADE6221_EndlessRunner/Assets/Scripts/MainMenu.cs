@@ -16,6 +16,14 @@ public class MainMenu : MonoBehaviour
 
         brightnessSlider.value = 1;
         volumeSlider.value = 1;
+        optionsPanel.SetActive(false);
+
+        brightnessSlider.value = 1;
+        volumeSlider.value = 1;
+
+
+        AudioManager.Instance.PlayMainMenuMusic();
+
     }
 
 
@@ -57,4 +65,7 @@ public class MainMenu : MonoBehaviour
 
         AudioListener.volume = value;
     }
+
+
+
 }

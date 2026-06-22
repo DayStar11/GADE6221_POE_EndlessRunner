@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public float rightLimit = 5.0f;
     public float leftLimit = -5.0f;
     //player life mechanics:
-    bool isDead = false;
+   public bool isDead = false;
     // creating a bool to check if a player already has a pick up kylin
     public bool hasPickUp = false;
     public bool magnetActive = false;
@@ -67,6 +67,13 @@ public class PlayerController : MonoBehaviour
         playerHealth = maxHealth;
         playerHealthBar.SetHealth(playerHealth, maxHealth);
         playerHealthBar.gameObject.SetActive(false);
+
+
+        AudioManager.Instance.PlayGameMusic();
+
+        rb = GetComponent<Rigidbody>();
+
+
     }
 
     // Update is called once per frame
@@ -89,6 +96,12 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump") && onGround)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+
+            AudioManager.Instance.PlaySFX(
+      AudioManager.Instance.jumpSound
+  );
+
             onGround = false;
         }
 
@@ -161,15 +174,22 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void PlayerDeath()  //player life mechanics:
+    public void PlayerDeath()
     {
         isDead = true;
 
-        // gives the player the option to restart kylin
+
+        // PLAYER DEATH SOUND
+        AudioManager.Instance.PlaySFX(
+            AudioManager.Instance.deathSound
+        );
+
+
         GameManagement gc = FindFirstObjectByType<GameManagement>();
+
         if (gc != null)
         {
-            gc.GameOver(); // displays the game over panel
+            gc.GameOver();
         }
     }
 
@@ -257,17 +277,74 @@ public class PlayerController : MonoBehaviour
     {
         if (hasPickUp) return;
 
+
         hasPickUp = true;
         storedPowerUp = type;
 
+
+        // PLAY PICKUP SOUND ONLY WHEN COLLECTED
+        switch (type)
+        {
+            case PlayerPickups.PickUpType.CoinMagnet:
+
+                AudioManager.Instance.PlaySFX(
+                AudioManager.Instance.magnetSound);
+
+                break;
+
+
+            case PlayerPickups.PickUpType.SuperJump:
+
+                AudioManager.Instance.PlaySFX(
+                AudioManager.Instance.superJumpSound);
+
+                break;
+
+
+            case PlayerPickups.PickUpType.Permeate:
+
+                AudioManager.Instance.PlaySFX(
+                AudioManager.Instance.permeateSound);
+
+                break;
+
+
+            case PlayerPickups.PickUpType.Shield:
+
+                AudioManager.Instance.PlaySFX(
+                AudioManager.Instance.shieldSound);
+
+                break;
+
+
+            case PlayerPickups.PickUpType.BossKiller:
+
+                AudioManager.Instance.PlaySFX(
+                AudioManager.Instance.bossKillerSound);
+
+                break;
+        }
+
+
+
         Destroy(pickup);
+        GameManagement gm =
+FindFirstObjectByType<GameManagement>();
+
+        if (gm != null)
+        {
+            gm.PickupActivated();
+        }
+
+
 
         if (pickUpText != null)
         {
-
             pickUpText.gameObject.SetActive(true);
             pickUpText.text = "Press E";
         }
+
+
         if (timerText != null)
         {
             timerText.gameObject.SetActive(false);

@@ -48,12 +48,23 @@ public class BossManager : MonoBehaviour
     void SpawnBoss()
     {
         bossSpawned = true;
+        GameManagement gm =
+FindFirstObjectByType<GameManagement>();
+
+        if (gm != null)
+        {
+            gm.BossSpawned();
+        }
+
+        AudioManager.Instance.PlaySFX(
+    AudioManager.Instance.bossSpawnSound
+);
         //only show players healthbar once boss has spawned
         player.playerHealthBar.gameObject.SetActive(true);
-        
+
 
         Vector3 spawnPos = player.transform.position;
-        spawnPos.z -= 5f; 
+        spawnPos.z -= 5f;
         spawnPos.y = 1f;
 
         GameObject bossInstance = Instantiate(bossPrefab, spawnPos, Quaternion.identity);
@@ -79,9 +90,22 @@ public class BossManager : MonoBehaviour
     }
 
     public void BossDefeated() //daiyaan
+ 
+     
     {
+
+        GameManagement gm =
+        FindFirstObjectByType<GameManagement>();
+
+        if (gm != null)
+        {
+            gm.BossBeaten();
+        }
         bossSpawned = false;
 
+        AudioManager.Instance.PlaySFX(
+    AudioManager.Instance.bossDeathSound
+);
         //remove players healthbar
         player.playerHealthBar.gameObject.SetActive(false);
         //remove boss healthbar

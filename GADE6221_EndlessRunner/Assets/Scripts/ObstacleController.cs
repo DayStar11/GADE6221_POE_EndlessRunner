@@ -1,4 +1,5 @@
 using UnityEngine;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 
 public class ObstacleController : MonoBehaviour
 {
@@ -11,18 +12,20 @@ public class ObstacleController : MonoBehaviour
         playerMovement = FindFirstObjectByType<PlayerController>();
     }
 
-  // put this in notepad its the hitting obstacles multi
+    // put this in notepad its the hitting obstacles multi
 
     //kylin:
     void Update()
     {
-        // function for player to earn points after passing an opstacle. checks if player has passed the obstacle
         if (playerMovement != null && playerMovement.transform.position.z > transform.position.z + 1f && !counted)
         {
             playerMovement.AddDodgePoint();
             counted = true;
         }
     }
-
     private bool counted = false;
+
 }
+
+
+
