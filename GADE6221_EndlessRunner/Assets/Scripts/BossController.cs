@@ -31,17 +31,26 @@ public class BossController : MonoBehaviour
     private float delayedLaneX;
     //healthbar UI 
     public int maxHealth = 50;
-    public BossHealthBar bossHealthBar;
+    public HealthBar bossHealthBar;
 
     void Start()
     {
         Debug.Log(gameObject.name + " has spawned.");
 
-        //set healthbar values
-        if (bossHealthBar == null)
+        Debug.Log(bossHealthBar);
+
+        if (bossHealthBar != null)
         {
-            bossHealthBar = FindFirstObjectByType<BossHealthBar>();
+            bossHealthBar.gameObject.SetActive(true);
+
+            bossHealth = maxHealth;
+            bossHealthBar.SetHealth(bossHealth, maxHealth);
         }
+        else
+        {
+            Debug.LogError("No BossHealthBar found in the scene!");
+        }
+
         bossHealth = maxHealth;
         if (bossHealthBar != null)
         {
@@ -55,15 +64,15 @@ public class BossController : MonoBehaviour
         if (player == null)
         {
             PlayerController foundPlayer = FindFirstObjectByType<PlayerController>();
-            //delay mechanics
-            targetLaneX = player.position.x;
-            delayedLaneX = player.position.x;
 
             if (foundPlayer != null)
             {
                 player = foundPlayer.transform;
             }
         }
+
+        targetLaneX = player.position.x;
+        delayedLaneX = player.position.x;
 
         startingFollowDistance = followDistance;
         bossManager = FindFirstObjectByType<BossManager>();
@@ -146,6 +155,11 @@ public class BossController : MonoBehaviour
         if (bossManager != null)
         {
             bossManager.BossDefeated();
+        }
+
+        if (bossHealthBar != null)
+        {
+            bossHealthBar.gameObject.SetActive(false);
         }
 
         Destroy(gameObject);
