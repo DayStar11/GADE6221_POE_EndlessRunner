@@ -37,6 +37,7 @@ public class NewMonoBehaviourScript : MonoBehaviour
     }
     void SpawnBossFightPickups()
     {
+        
         int lane;
         Vector3 spawnPos;
 

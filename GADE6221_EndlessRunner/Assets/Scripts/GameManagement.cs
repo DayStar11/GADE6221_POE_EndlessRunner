@@ -63,11 +63,11 @@ public class GameManagement : MonoBehaviour
     void UpdateScore()
     {
         finalCoinText.text =
-        "Coins Collected: " + player.coins;
+        "Coins Collected: " + PlayerController.coins;
 
 
         finalDodgeText.text =
-        "Score Points: " + player.DodgePoints;
+        "Score Points: " + PlayerController.DodgePoints;
     }
 
 
@@ -77,9 +77,10 @@ public class GameManagement : MonoBehaviour
     {
         Time.timeScale = 1f;
 
-        SceneManager.LoadScene(
-            SceneManager.GetActiveScene().name
-        );
+        PlayerController.coins = 0;
+        PlayerController.DodgePoints = 0;
+
+        SceneManager.LoadScene("GADE6221_POE_COIN_SCENE");
     }
 
 
@@ -105,9 +106,9 @@ public class GameManagement : MonoBehaviour
     }
     public void ConfirmContinue()
     {
-        if (player.coins >= reviveCost)
+        if (PlayerController.coins >= reviveCost)
         {
-            player.coins -= reviveCost;
+            PlayerController.coins -= reviveCost;
             player.UpdateUI();
 
             reviveCost += 10;

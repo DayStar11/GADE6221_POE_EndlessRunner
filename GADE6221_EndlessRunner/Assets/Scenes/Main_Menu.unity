@@ -1579,14 +1579,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::AudioManager
   musicSource: {fileID: 984260653}
   mainMenuMusic: {fileID: 8300000, guid: f3cd972dbcd879a4fb0f64782297c4cf, type: 3}
-  gameMusic: {fileID: 8300000, guid: 08687980f1c8dcd43a2a3c51549f2028, type: 3}
+  gameMusic: {fileID: 8300000, guid: 01f8254f6c3f59941844f66212827ff3, type: 3}
   sfxSource: {fileID: 984260652}
   jumpSound: {fileID: 8300000, guid: c8b89850d8e576e458ba9f2dba2d51f7, type: 3}
-  shieldSound: {fileID: 8300000, guid: 032305e061a00f24cb4adc4e182c1525, type: 3}
-  magnetSound: {fileID: 8300000, guid: 032305e061a00f24cb4adc4e182c1525, type: 3}
-  superJumpSound: {fileID: 8300000, guid: 032305e061a00f24cb4adc4e182c1525, type: 3}
-  permeateSound: {fileID: 8300000, guid: 032305e061a00f24cb4adc4e182c1525, type: 3}
-  bossKillerSound: {fileID: 8300000, guid: 032305e061a00f24cb4adc4e182c1525, type: 3}
+  shieldSound: {fileID: 8300000, guid: 2257223e1f11ae94f818f5132c0e6113, type: 3}
+  magnetSound: {fileID: 8300000, guid: 2257223e1f11ae94f818f5132c0e6113, type: 3}
+  superJumpSound: {fileID: 8300000, guid: 2257223e1f11ae94f818f5132c0e6113, type: 3}
+  permeateSound: {fileID: 8300000, guid: 2257223e1f11ae94f818f5132c0e6113, type: 3}
+  bossKillerSound: {fileID: 8300000, guid: 2257223e1f11ae94f818f5132c0e6113, type: 3}
   deathSound: {fileID: 8300000, guid: d444313b0c016684d84e7ae3a16c5ecc, type: 3}
   bossSpawnSound: {fileID: 8300000, guid: d444313b0c016684d84e7ae3a16c5ecc, type: 3}
   bossDeathSound: {fileID: 8300000, guid: d444313b0c016684d84e7ae3a16c5ecc, type: 3}
@@ -1977,6 +1977,7 @@ GameObject:
   - component: {fileID: 1269251970}
   - component: {fileID: 1269251969}
   - component: {fileID: 1269251968}
+  - component: {fileID: 1269251971}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2058,6 +2059,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1269251971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1269251967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.Runtime::UnityEngine.Rendering.Universal.UniversalAdditionalCameraData
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2
 --- !u!1 &1304734833
 GameObject:
   m_ObjectHideFlags: 0

@@ -5149,6 +5149,7 @@ MonoBehaviour:
   jumpForce: 5
   rightLimit: 5
   leftLimit: -5
+  isDead: 0
   hasPickUp: 0
   magnetActive: 0
   superJumpActive: 0
@@ -5210,6 +5211,30 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 1
+--- !u!1 &518183649 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4002856288562234642, guid: c50cc593a8363ad419371b4ce2bc56b8, type: 3}
+  m_PrefabInstance: {fileID: 1895552128}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &518183651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518183649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 824774a39c94b6e42a539a129f3b41b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossManager
+  bossPrefab: {fileID: 2959961035307355648, guid: 30d7fba631ae1ab4cb40a7e3f1fc0693, type: 3}
+  player: {fileID: 470340853}
+  spawnDistance: 500
+  bossSpawned: 0
+  bossWarningText: {fileID: 0}
+  respawnDistance: 500
+  bossHealthBar: {fileID: 306661121296483310}
 --- !u!224 &692555600 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 226382005119333714, guid: 7287b703c9137aa468fc4cfc8fa85dd2, type: 3}
@@ -6136,7 +6161,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4002856288562234642, guid: c50cc593a8363ad419371b4ce2bc56b8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 518183651}
   m_SourcePrefab: {fileID: 100100000, guid: c50cc593a8363ad419371b4ce2bc56b8, type: 3}
 --- !u!1 &1999652071
 GameObject:

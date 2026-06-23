@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class BossManager : MonoBehaviour
 {
@@ -8,7 +9,7 @@ public class BossManager : MonoBehaviour
 
     public PlayerController player;
 
-    public float spawnDistance = 20f;
+    public float spawnDistance = 500f;
 
     public bool bossSpawned = false;
 
@@ -48,8 +49,7 @@ public class BossManager : MonoBehaviour
     void SpawnBoss()
     {
         bossSpawned = true;
-        GameManagement gm =
-FindFirstObjectByType<GameManagement>();
+        GameManagement gm = FindFirstObjectByType<GameManagement>();
 
         if (gm != null)
         {
@@ -90,12 +90,8 @@ FindFirstObjectByType<GameManagement>();
     }
 
     public void BossDefeated() //daiyaan
- 
-     
     {
-
-        GameManagement gm =
-        FindFirstObjectByType<GameManagement>();
+        GameManagement gm = FindFirstObjectByType<GameManagement>();
 
         if (gm != null)
         {
@@ -103,25 +99,24 @@ FindFirstObjectByType<GameManagement>();
         }
         bossSpawned = false;
 
-        AudioManager.Instance.PlaySFX(
-    AudioManager.Instance.bossDeathSound
-);
-        //remove players healthbar
+        AudioManager.Instance.PlaySFX(AudioManager.Instance.bossDeathSound);
+
         player.playerHealthBar.gameObject.SetActive(false);
-        //remove boss healthbar
-        if (currentBoss != null)
+        if (bossHealthBar != null)
         {
             bossHealthBar.gameObject.SetActive(false);
         }
 
         player.bossFightActive = false;
-
-        nextSpawnDistance = player.transform.position.z + respawnDistance;
-
         currentBoss = null;
-        //reset players health after the boss fight
+
+        //reset health
         player.playerHealth = player.maxHealth;
         player.playerHealthBar.SetHealth(player.playerHealth, player.maxHealth);
+
+        //loads scene 2 upon defeating the boss
+        Debug.Log("Level 1 Boss Defeated! Loading Level 2 scene");
+        SceneManager.LoadScene("LVL2");
     }
 
     IEnumerator BossWarning()

@@ -4,8 +4,8 @@ using UnityEngine.SceneManagement; //restart mechanics
 
 public class PlayerController : MonoBehaviour
 {    //kylin player coin and point system
-    public int coins = 0; // coins collected
-    public int DodgePoints = 0; // obstacle dodge points
+    public static int coins = 0; // coins collected
+    public static int DodgePoints = 0; // obstacle dodge points
     public TextMeshProUGUI coinText;
     public TextMeshProUGUI dodgeText;
     public TextMeshProUGUI pickUpText;
@@ -63,6 +63,8 @@ public class PlayerController : MonoBehaviour
             healthText.gameObject.SetActive(false);
         }
 
+        UpdateUI();
+
         //healthbar UI mechanics
         playerHealth = maxHealth;
         playerHealthBar.SetHealth(playerHealth, maxHealth);
@@ -70,9 +72,6 @@ public class PlayerController : MonoBehaviour
 
 
         AudioManager.Instance.PlayGameMusic();
-
-        rb = GetComponent<Rigidbody>();
-
 
     }
 
@@ -451,6 +450,16 @@ FindFirstObjectByType<GameManagement>();
         {
             PlayerDeath();
         }
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f;
+
+        coins = 0;
+        DodgePoints = 0;
+
+        SceneManager.LoadScene("GADE6221_POE_COIN_SCENE");
     }
 
 }

@@ -33,6 +33,8 @@ public class BossController : MonoBehaviour
     public int maxHealth = 50;
     public HealthBar bossHealthBar;
 
+    public Boss2Manager boss2Manager;
+
     void Start()
     {
         Debug.Log(gameObject.name + " has spawned.");
@@ -157,11 +159,15 @@ public class BossController : MonoBehaviour
             bossManager.BossDefeated();
         }
 
+        if (boss2Manager != null)
+        {
+            boss2Manager.BossDefeated();
+        }
+
         if (bossHealthBar != null)
         {
             bossHealthBar.gameObject.SetActive(false);
         }
-
         Destroy(gameObject);
     }
 
