@@ -9,6 +9,7 @@ public class PauseManager : MonoBehaviour
     public GameObject optionsPanel;
 
     public Slider brightnessSlider;
+    public Image brightnessOverlay;
     public Slider volumeSlider;
 
 
@@ -19,6 +20,15 @@ public class PauseManager : MonoBehaviour
     {
         pausePanel.SetActive(false);
         optionsPanel.SetActive(false);
+
+        float savedBrightness = PlayerPrefs.GetFloat("Brightness", 1f);
+        float savedVolume = PlayerPrefs.GetFloat("Volume", 1f);
+
+        brightnessSlider.value = savedBrightness;
+        volumeSlider.value = savedVolume;
+
+        ChangeBrightness(savedBrightness);
+        ChangeVolume(savedVolume);
 
         Time.timeScale = 1f;
     }
@@ -94,8 +104,11 @@ public class PauseManager : MonoBehaviour
 
     public void ChangeBrightness(float value)
     {
-        RenderSettings.ambientIntensity = value;
+        Color colour = brightnessOverlay.color;
+        colour.a = 1f - value;
+        brightnessOverlay.color = colour;
     }
+
 
 
 

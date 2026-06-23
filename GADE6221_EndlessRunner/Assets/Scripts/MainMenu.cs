@@ -7,6 +7,7 @@ public class MainMenu : MonoBehaviour
     public GameObject optionsPanel;
 
     public Slider brightnessSlider;
+    public Image brightnessOverlay;
     public Slider volumeSlider;
 
 
@@ -14,18 +15,17 @@ public class MainMenu : MonoBehaviour
     {
         optionsPanel.SetActive(false);
 
-        brightnessSlider.value = 1;
-        volumeSlider.value = 1;
-        optionsPanel.SetActive(false);
+        float savedBrightness = PlayerPrefs.GetFloat("Brightness", 1f);
+        float savedVolume = PlayerPrefs.GetFloat("Volume", 1f);
 
-        brightnessSlider.value = 1;
-        volumeSlider.value = 1;
+        brightnessSlider.value = savedBrightness;
+        volumeSlider.value = savedVolume;
 
+        ChangeBrightness(savedBrightness);
+        ChangeVolume(savedVolume);
 
         AudioManager.Instance.PlayMainMenuMusic();
-
     }
-
 
     public void StartGame()
     {
@@ -56,14 +56,16 @@ public class MainMenu : MonoBehaviour
     public void ChangeBrightness(float value)
     {
         RenderSettings.ambientIntensity = value;
+
+        PlayerPrefs.SetFloat("Brightness", value);
     }
 
 
     public void ChangeVolume(float value)
     {
-        // ready for audio later
-
         AudioListener.volume = value;
+
+        PlayerPrefs.SetFloat("Volume", value);
     }
 
 

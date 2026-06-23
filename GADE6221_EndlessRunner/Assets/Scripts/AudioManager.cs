@@ -73,5 +73,11 @@ public class AudioManager : MonoBehaviour
         sfxSource.PlayOneShot(clip);
     }
 
+    public void SetMusicVolume(float value)
+    {
+        musicSource.volume = value;
+
+        PlayerPrefs.SetFloat("Volume", value);
+    }
 
 }
