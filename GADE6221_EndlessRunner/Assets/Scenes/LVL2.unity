@@ -5251,8 +5251,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4355d85c0ffe78b45a9f9a006cac4d9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  coins: 0
-  DodgePoints: 0
   coinText: {fileID: 316427323}
   dodgeText: {fileID: 1108366451}
   pickUpText: {fileID: 4521337712449706641}
@@ -7092,6 +7090,38 @@ PrefabInstance:
     - target: {fileID: 226382005119333714, guid: 7287b703c9137aa468fc4cfc8fa85dd2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3517347949471924141, guid: 7287b703c9137aa468fc4cfc8fa85dd2, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3517347949471924141, guid: 7287b703c9137aa468fc4cfc8fa85dd2, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3517347949471924141, guid: 7287b703c9137aa468fc4cfc8fa85dd2, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3517347949471924141, guid: 7287b703c9137aa468fc4cfc8fa85dd2, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 5857433612159485172, guid: 7287b703c9137aa468fc4cfc8fa85dd2, type: 3}
+      propertyPath: m_fontColor.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5857433612159485172, guid: 7287b703c9137aa468fc4cfc8fa85dd2, type: 3}
+      propertyPath: m_fontColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5857433612159485172, guid: 7287b703c9137aa468fc4cfc8fa85dd2, type: 3}
+      propertyPath: m_fontColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5857433612159485172, guid: 7287b703c9137aa468fc4cfc8fa85dd2, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 7599595162261170065, guid: 7287b703c9137aa468fc4cfc8fa85dd2, type: 3}
       propertyPath: m_Name
