@@ -10,6 +10,7 @@ public class GameManagement : MonoBehaviour
 
     public TextMeshProUGUI finalCoinText;
     public TextMeshProUGUI finalDodgeText;
+    public TextMeshProUGUI highScoreText;
 
     public Button continueButton;
 
@@ -68,6 +69,11 @@ public class GameManagement : MonoBehaviour
 
         finalDodgeText.text =
         "Score Points: " + PlayerController.DodgePoints;
+
+        DatabaseManager.Instance.UpdateHighScore(PlayerController.DodgePoints);
+
+        highScoreText.text = "High Score: "+ DatabaseManager.Instance.player.highScore;
+
     }
 
 
@@ -113,15 +119,20 @@ public class GameManagement : MonoBehaviour
 
             reviveCost += 10;
 
+            player.isDead = false; //resets isdead bool so that logic continues
+
             player.playerHealth = player.maxHealth;
+            player.playerHealthBar.SetHealth(player.playerHealth, player.maxHealth);
 
-            // reset movement state
+            //resets rigid body to continue movement
             Rigidbody rb = player.GetComponent<Rigidbody>();
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector3.zero;
+                rb.angularVelocity = Vector3.zero;
+            }
 
-            // move player slightly forward so they don't "re-trigger death zone"
-            player.transform.position += Vector3.forward * 2f;
+            player.transform.position += Vector3.forward * 8f;
 
             confirmPanel.SetActive(false);
             gameOver.SetActive(false);
@@ -133,6 +144,7 @@ public class GameManagement : MonoBehaviour
             confirmText.text = "Not enough coins!";
         }
     }
+
     public void CancelContinue()
     {
         confirmPanel.SetActive(false);

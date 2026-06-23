@@ -27,7 +27,7 @@ public class PauseManager : MonoBehaviour
         brightnessSlider.value = savedBrightness;
         volumeSlider.value = savedVolume;
 
-        ChangeBrightness(savedBrightness);
+        //ChangeBrightness(savedBrightness);
         ChangeVolume(savedVolume);
 
         Time.timeScale = 1f;
@@ -102,12 +102,12 @@ public class PauseManager : MonoBehaviour
 
 
 
-    public void ChangeBrightness(float value)
-    {
-        Color colour = brightnessOverlay.color;
-        colour.a = 1f - value;
-        brightnessOverlay.color = colour;
-    }
+    //public void ChangeBrightness(float value)
+    //{
+    //    Color colour = brightnessOverlay.color;
+    //    colour.a = 1f - value;
+    //    brightnessOverlay.color = colour;
+    //}
 
 
 

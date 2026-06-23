@@ -452,14 +452,6 @@ FindFirstObjectByType<GameManagement>();
         }
     }
 
-    public void RestartGame()
-    {
-        Time.timeScale = 1f;
 
-        coins = 0;
-        DodgePoints = 0;
-
-        SceneManager.LoadScene("GADE6221_POE_COIN_SCENE");
-    }
 
 }

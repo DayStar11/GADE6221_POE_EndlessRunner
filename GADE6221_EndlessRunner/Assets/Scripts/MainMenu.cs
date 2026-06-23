@@ -10,6 +10,12 @@ public class MainMenu : MonoBehaviour
     public Image brightnessOverlay;
     public Slider volumeSlider;
 
+    public GameObject loginPanel;
+    public GameObject highscorePanel;
+
+    public Button startButton;
+    public Button loginButton;
+
 
     void Start()
     {
@@ -25,6 +31,24 @@ public class MainMenu : MonoBehaviour
         ChangeVolume(savedVolume);
 
         AudioManager.Instance.PlayMainMenuMusic();
+        loginPanel.SetActive(false);
+        highscorePanel.SetActive(false);
+
+        if (DatabaseManager.Instance.player.playerName != "")
+        {
+
+            startButton.interactable = true;
+
+            loginButton.gameObject.SetActive(true);
+
+        }
+
+        else
+        {
+
+            startButton.interactable = false;
+
+        }
     }
 
     public void StartGame()
@@ -55,11 +79,10 @@ public class MainMenu : MonoBehaviour
 
     public void ChangeBrightness(float value)
     {
-        RenderSettings.ambientIntensity = value;
-
-        PlayerPrefs.SetFloat("Brightness", value);
+        Color colour = brightnessOverlay.color;
+        colour.a = 1f - value;
+        brightnessOverlay.color = colour;
     }
-
 
     public void ChangeVolume(float value)
     {
@@ -68,6 +91,27 @@ public class MainMenu : MonoBehaviour
         PlayerPrefs.SetFloat("Volume", value);
     }
 
+    public void OpenLogin()
+    {
 
+        loginPanel.SetActive(true);
+
+    }
+
+    public void CloseLogin()
+    {
+        loginPanel.SetActive(false);
+    }
+    public void OpenHighScore()
+    {
+
+        highscorePanel.SetActive(true);
+
+    }
+
+    public void CloseHighScore()
+    {
+        highscorePanel.SetActive(false);
+    }
 
 }

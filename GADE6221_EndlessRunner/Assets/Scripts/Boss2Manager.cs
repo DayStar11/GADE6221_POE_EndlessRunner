@@ -66,7 +66,7 @@ public class Boss2Manager : MonoBehaviour
         {
             bossScript.player = player.transform;
             bossScript.bossHealthBar = bossHealthBar;
-            bossScript.boss2Manager = this; // <-- Hand over this Level 2 manager reference explicitly!
+            bossScript.boss2Manager = this;
             currentBoss = bossScript;
             player.bossFightActive = true;
         }
